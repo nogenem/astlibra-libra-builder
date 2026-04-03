@@ -397,6 +397,21 @@ function initSolveWorker() {
 }
 
 /**
+ * Resets the Web Worker (terminates and clears references)
+ */
+function resetSolveWorker() {
+  if (solveWorker) {
+    try {
+      solveWorker.terminate();
+    } catch (e) {
+      console.warn("Error terminating worker:", e.message);
+    }
+    solveWorker = null;
+  }
+  solveWorkerResolvers.clear();
+}
+
+/**
  * Solves using Web Worker (async) if available, otherwise sync
  * Returns a Promise that resolves with the results
  */
@@ -409,8 +424,11 @@ function solveAsync(pool, desired, order = "desc") {
     return Promise.resolve(solve(pool, desired, order));
   }
 
-  return new Promise((resolve, reject) => {
+  let pendingId = null;
+
+  const promise = new Promise((resolve, reject) => {
     const id = ++messageIdCounter;
+    pendingId = id;
 
     solveWorkerResolvers.set(id, { resolve, reject });
 
@@ -435,4 +453,17 @@ function solveAsync(pool, desired, order = "desc") {
       reject(e);
     }
   });
+
+  // Attach cancel method to the promise
+  promise.cancel = () => {
+    if (pendingId && solveWorkerResolvers.has(pendingId)) {
+      const resolver = solveWorkerResolvers.get(pendingId);
+      resolver.reject(new Error("Search cancelled by user"));
+      solveWorkerResolvers.delete(pendingId);
+    }
+    // Reset worker to stop processing
+    resetSolveWorker();
+  };
+
+  return promise;
 }

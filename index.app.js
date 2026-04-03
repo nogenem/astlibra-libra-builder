@@ -155,11 +155,25 @@ function runOptimizer() {
   setStatus("Searching for optimal combinations...", true);
 
   const findBtn = document.getElementById("find-btn");
+  const cancelContainer = document.getElementById("cancel-search-container");
+  const cancelBtn = document.getElementById("cancel-search-btn");
   findBtn.disabled = true;
 
+  let solvePromise = null;
+  let cancelTimeout = null;
+
   setTimeout(() => {
-    solveAsync(allItems, desired, currentSortOrder)
+    solvePromise = solveAsync(allItems, desired, currentSortOrder);
+
+    // Show cancel button after 10 seconds
+    cancelTimeout = setTimeout(() => {
+      cancelContainer.style.display = "block";
+    }, 10000);
+
+    solvePromise
       .then((results) => {
+        clearTimeout(cancelTimeout);
+        cancelContainer.style.display = "none";
         setStatus("");
         if (results.length === 0) {
           showNoResults("No balanced combinations found with the selected stats.");
@@ -168,6 +182,8 @@ function runOptimizer() {
         showResults(results, desired);
       })
       .catch((error) => {
+        clearTimeout(cancelTimeout);
+        cancelContainer.style.display = "none";
         setStatus("");
         showNoResults("Error: " + error.message);
       })
@@ -175,4 +191,15 @@ function runOptimizer() {
         findBtn.disabled = false;
       });
   }, 1000);
+
+  // Cancel button event listener
+  cancelBtn.onclick = () => {
+    if (solvePromise && solvePromise.cancel) {
+      solvePromise.cancel();
+      clearTimeout(cancelTimeout);
+      cancelContainer.style.display = "none";
+      setStatus("");
+      findBtn.disabled = false;
+    }
+  };
 }

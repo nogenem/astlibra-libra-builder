@@ -400,6 +400,23 @@ main {
   transform: none;
   box-shadow: none;
 }
+.btn-cancel {
+  background: rgba(220, 100, 100, 0.2);
+  color: #ff9999;
+  border: 1.5px solid #cc6666;
+  padding: 10px 32px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-cancel:hover {
+  background: rgba(220, 100, 100, 0.4);
+  border-color: #ff6666;
+  color: #ffcccc;
+}
+.btn-cancel:active {
+  transform: translateY(1px);
+}
 #status-bar {
   text-align: center;
   font-size: 0.9rem;
