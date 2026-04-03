@@ -8,7 +8,7 @@ function getItemStatsScore(item) {
 }
 
 function getStatKey(stat) {
-  return stat.name + "|" + stat.tier;
+  return stat.name.toLowerCase().trim() + "|" + stat.tier;
 }
 
 function parseStat(s) {
@@ -90,7 +90,9 @@ function buildMap(items, desiredStats) {
   const statsMap = new Map();
 
   // Desired stats receive the first bits (0, 1, 2, ...)
-  desiredStats.forEach((s, i) => statsMap.set(s, 1n << BigInt(i)));
+  desiredStats.forEach((s, i) => {
+    statsMap.set(s, 1n << BigInt(i));
+  });
 
   // Other stats receive subsequent bits
   let nextBit = desiredStats.length;
@@ -155,7 +157,7 @@ function preFiltering(items, statsMap, desiredMask) {
 // Phase 1 — Bases that cover the desired stats
 function generateBases(baseItems, desiredMask) {
   const bases = [];
-  const maxBaseSize = MAX_ITEMS_LEFT + MAX_ITEMS_RIGHT - 1;
+  const maxBaseSize = MAX_ITEMS_LEFT + MAX_ITEMS_RIGHT;
 
   function search(index, combo, currentMask, karma) {
     // Checks if ALL desired bits are present
@@ -262,7 +264,6 @@ function balanceWithFillers(bases, fillerItems) {
   };
 
   for (const base of bases) {
-    if (maxTotal - base.items.length === 0) continue;
     searchFillers(base, 0, [], 0);
   }
 
@@ -272,10 +273,14 @@ function balanceWithFillers(bases, fillerItems) {
 
 function solve(pool, desired, order = "desc") {
   // Use desired keys directly as desiredStats
-  const desiredStats = desired.map((d) => d.key);
+  const desiredStats = desired.map((d) => d.key.toLowerCase().trim());
+  console.log("desiredStats:", desiredStats);
 
   const statsMap = buildMap(pool, desiredStats);
+  console.log("statsMap size:", statsMap.size, "desired bits:", desiredStats.length);
+
   const desiredMask = desiredStats.reduce((acc, s) => acc | (statsMap.get(s) ?? 0n), 0n);
+  console.log("desiredMask:", desiredMask.toString(2));
 
   const { base, fillers } = preFiltering(pool, statsMap, desiredMask);
 
@@ -305,8 +310,6 @@ async function parseSaveFile(saveFile, allItems) {
 
   // DataView allows us to read integers at specific positions (offsets) in the buffer
   const view = new DataView(buffer);
-
-  console.log("Pans: ", view.getInt32(BASE_ADDR + 0x07 * 4, true));
 
   const pans = view.getInt32(BASE_ADDR + PANS_ADDR * 4, true);
 
