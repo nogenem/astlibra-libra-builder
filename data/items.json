@@ -1,0 +1,1793 @@
+﻿[
+  {
+    "id": 8,
+    "name": "Camping Set",
+    "karma": "10",
+    "stats1": "Max HP",
+    "stats2": "Max ST",
+    "stats3": "",
+    "icon": "item_001.png"
+  },
+  {
+    "id": 9,
+    "name": "The Book of Karon: Vol 36 (Travel)",
+    "karma": "68",
+    "stats1": "Experience Earned",
+    "stats2": "Coins Earned",
+    "stats3": "Magical Power (GOOD)",
+    "icon": "item_002.png"
+  },
+  {
+    "id": 10,
+    "name": "Goji Berries",
+    "karma": "5",
+    "stats1": "HP Recovery",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_003.png"
+  },
+  {
+    "id": 11,
+    "name": "Torch",
+    "karma": "16",
+    "stats1": "Effect Duration",
+    "stats2": "Max HP",
+    "stats3": "",
+    "icon": "item_004.png"
+  },
+  {
+    "id": 12,
+    "name": "Copper Chests Key",
+    "karma": "2",
+    "stats1": "Use Speed",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_005.png"
+  },
+  {
+    "id": 13,
+    "name": "Bundle of Wooden Sticks",
+    "karma": "17",
+    "stats1": "Attack Power",
+    "stats2": "ST Gain Rate",
+    "stats3": "",
+    "icon": "item_006.png"
+  },
+  {
+    "id": 14,
+    "name": "18 Liter Container of Pine Resin",
+    "karma": "17",
+    "stats1": "Defense Power",
+    "stats2": "Effect Duration",
+    "stats3": "",
+    "icon": "item_007.png"
+  },
+  {
+    "id": 15,
+    "name": "Bread",
+    "karma": "29",
+    "stats1": "Petrifaction Resistance",
+    "stats2": "Paralysis Resistance",
+    "stats3": "Bleeding Resistance",
+    "icon": "item_008.png"
+  },
+  {
+    "id": 16,
+    "name": "Egg",
+    "karma": "24",
+    "stats1": "Paralysis Resistance",
+    "stats2": "Poison Resistance",
+    "stats3": "",
+    "icon": "item_009.png"
+  },
+  {
+    "id": 17,
+    "name": "Egg on Bread",
+    "karma": "18",
+    "stats1": "Max HP",
+    "stats2": "HP Recovery",
+    "stats3": "ST Gain Rate",
+    "icon": "item_010.png"
+  },
+  {
+    "id": 18,
+    "name": "Sugar",
+    "karma": "91",
+    "stats1": "Petrifaction Resistance (EPIC)",
+    "stats2": "Poison Resistance (EPIC)",
+    "stats3": "Blind Resistance (EPIC)",
+    "icon": "item_011.png"
+  },
+  {
+    "id": 19,
+    "name": "Cotton Candy",
+    "karma": "85",
+    "stats1": "Paralysis Resistance (EPIC)",
+    "stats2": "Petrifaction Resistance (EPIC)",
+    "stats3": "Blind Resistance (EPIC)",
+    "icon": "item_012.png"
+  },
+  {
+    "id": 20,
+    "name": "Blue Orb",
+    "karma": "32",
+    "stats1": "Attack Power",
+    "stats2": "Defense Power",
+    "stats3": "Magical Power",
+    "icon": "item_013.png"
+  },
+  {
+    "id": 21,
+    "name": "Red Orb",
+    "karma": "23",
+    "stats1": "Guard Durability",
+    "stats2": "HP Recovery",
+    "stats3": "Weight Reduction",
+    "icon": "item_014.png"
+  },
+  {
+    "id": 22,
+    "name": "Withered Legendary Herb",
+    "karma": "24",
+    "stats1": "Max HP",
+    "stats2": "HP Recovery",
+    "stats3": "Gradual Recovery",
+    "icon": "item_015.png"
+  },
+  {
+    "id": 23,
+    "name": "Anulis' Ribbon",
+    "karma": "29",
+    "stats1": "Weight Reduction",
+    "stats2": "Use Speed (GOOD)",
+    "stats3": "",
+    "icon": "item_016.png"
+  },
+  {
+    "id": 28,
+    "name": "Dew from the World Tree",
+    "karma": "29",
+    "stats1": "Weight Reduction",
+    "stats2": "Gradual Recovery",
+    "stats3": "",
+    "icon": "item_017.png"
+  },
+  {
+    "id": 29,
+    "name": "Strawberry",
+    "karma": "43",
+    "stats1": "Paralysis Resistance",
+    "stats2": "Blind Resistance (GOOD)",
+    "stats3": "Bleeding Resistance",
+    "icon": "item_018.png"
+  },
+  {
+    "id": 30,
+    "name": "Milk",
+    "karma": "43",
+    "stats1": "Paralysis Resistance (GOOD)",
+    "stats2": "Poison Resistance",
+    "stats3": "Bleeding Resistance",
+    "icon": "item_019.png"
+  },
+  {
+    "id": 31,
+    "name": "Butter",
+    "karma": "23",
+    "stats1": "Bleeding Resistance",
+    "stats2": "Paralysis Resistance",
+    "stats3": "",
+    "icon": "item_020.png"
+  },
+  {
+    "id": 32,
+    "name": "Tea Leaves",
+    "karma": "73",
+    "stats1": "Bleeding Resistance (EPIC)",
+    "stats2": "Paralysis Resistance (EPIC)",
+    "stats3": "Poison Resistance",
+    "icon": "item_021.png"
+  },
+  {
+    "id": 33,
+    "name": "Flour",
+    "karma": "16",
+    "stats1": "Petrifaction Resistance",
+    "stats2": "Blind Resistance",
+    "stats3": "",
+    "icon": "item_022.png"
+  },
+  {
+    "id": 34,
+    "name": "Beef",
+    "karma": "61",
+    "stats1": "Poison Resistance (EPIC)",
+    "stats2": "Blind Resistance (GOOD)",
+    "stats3": "Petrifaction Resistance",
+    "icon": "item_023.png"
+  },
+  {
+    "id": 35,
+    "name": "Cocoa",
+    "karma": "64",
+    "stats1": "Paralysis Resistance (EPIC)",
+    "stats2": "Poison Resistance (GOOD)",
+    "stats3": "Blind Resistance",
+    "icon": "item_024.png"
+  },
+  {
+    "id": 36,
+    "name": "Chocolate",
+    "karma": "74",
+    "stats1": "Poison Resistance (EPIC)",
+    "stats2": "Blind Resistance (GOOD)",
+    "stats3": "Paralysis Resistance (GOOD)",
+    "icon": "item_025.png"
+  },
+  {
+    "id": 38,
+    "name": "Apple",
+    "karma": "43",
+    "stats1": "Bleeding Resistance (GOOD)",
+    "stats2": "Blind Resistance",
+    "stats3": "Paralysis Resistance",
+    "icon": "item_026.png"
+  },
+  {
+    "id": 39,
+    "name": "Cheese",
+    "karma": "39",
+    "stats1": "Bleeding Resistance",
+    "stats2": "Poison Resistance",
+    "stats3": "Blind Resistance",
+    "icon": "item_027.png"
+  },
+  {
+    "id": 40,
+    "name": "Chestnut",
+    "karma": "31",
+    "stats1": "Petrifaction Resistance (GOOD)",
+    "stats2": "Paralysis Resistance",
+    "stats3": "Petrifaction Resistance",
+    "icon": "item_028.png"
+  },
+  {
+    "id": 43,
+    "name": "Copper Ore",
+    "karma": "8",
+    "stats1": "Defense Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_029.png"
+  },
+  {
+    "id": 44,
+    "name": "Iron Ore",
+    "karma": "9",
+    "stats1": "Defense Power",
+    "stats2": "Guard Durability",
+    "stats3": "",
+    "icon": "item_030.png"
+  },
+  {
+    "id": 45,
+    "name": "Gold Ore",
+    "karma": "19",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "Guard Durability",
+    "stats3": "",
+    "icon": "item_031.png"
+  },
+  {
+    "id": 46,
+    "name": "Highcarbon Steel Ore",
+    "karma": "29",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "Guard Durability (GOOD)",
+    "stats3": "",
+    "icon": "item_032.png"
+  },
+  {
+    "id": 47,
+    "name": "Magical Silver Ore",
+    "karma": "39",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "Guard Durability (EPIC)",
+    "stats3": "",
+    "icon": "item_033.png"
+  },
+  {
+    "id": 48,
+    "name": "Adamantine",
+    "karma": "39",
+    "stats1": "Defense Power (EPIC)",
+    "stats2": "Guard Durability (GOOD)",
+    "stats3": "",
+    "icon": "item_034.png"
+  },
+  {
+    "id": 49,
+    "name": "Copper Ingot",
+    "karma": "11",
+    "stats1": "Attack Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_035.png"
+  },
+  {
+    "id": 50,
+    "name": "Iron Ingot",
+    "karma": "11",
+    "stats1": "Attack Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_036.png"
+  },
+  {
+    "id": 51,
+    "name": "Gold Ingot",
+    "karma": "24",
+    "stats1": "Attack Power",
+    "stats2": "Magical Power",
+    "stats3": "",
+    "icon": "item_037.png"
+  },
+  {
+    "id": 52,
+    "name": "Damascus Ingot",
+    "karma": "34",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Magical Power",
+    "stats3": "",
+    "icon": "item_038.png"
+  },
+  {
+    "id": 53,
+    "name": "Mithril",
+    "karma": "44",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Magical Power (GOOD)",
+    "stats3": "",
+    "icon": "item_039.png"
+  },
+  {
+    "id": 54,
+    "name": "Adamantite",
+    "karma": "54",
+    "stats1": "Attack Power (EPIC)",
+    "stats2": "Magical Power (GOOD)",
+    "stats3": "",
+    "icon": "item_040.png"
+  },
+  {
+    "id": 56,
+    "name": "Stones",
+    "karma": "8",
+    "stats1": "Defense Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_041.png"
+  },
+  {
+    "id": 57,
+    "name": "Wooden Log",
+    "karma": "3",
+    "stats1": "Max ST",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_042.png"
+  },
+  {
+    "id": 58,
+    "name": "Charcoal",
+    "karma": "10",
+    "stats1": "Defense Power",
+    "stats2": "Use Speed",
+    "stats3": "",
+    "icon": "item_043.png"
+  },
+  {
+    "id": 59,
+    "name": "Slime's Eyeball",
+    "karma": "7",
+    "stats1": "Max HP",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_044.png"
+  },
+  {
+    "id": 60,
+    "name": "Beautiful Bones",
+    "karma": "8",
+    "stats1": "Defense Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_045.png"
+  },
+  {
+    "id": 61,
+    "name": "Wooden Pickaxe",
+    "karma": "9",
+    "stats1": "Effect Duration",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_046.png"
+  },
+  {
+    "id": 62,
+    "name": "Silver Chests Key",
+    "karma": "23",
+    "stats1": "Experience Earned",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_047.png"
+  },
+  {
+    "id": 63,
+    "name": "Gold Chests Key",
+    "karma": "22",
+    "stats1": "Coins Earned",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_048.png"
+  },
+  {
+    "id": 64,
+    "name": "Lantern",
+    "karma": "36",
+    "stats1": "Effect Duration (GOOD)",
+    "stats2": "Max HP (GOOD)",
+    "stats3": "",
+    "icon": "item_049.png"
+  },
+  {
+    "id": 65,
+    "name": "Soma",
+    "karma": "12",
+    "stats1": "Max HP",
+    "stats2": "HP Recovery",
+    "stats3": "",
+    "icon": "item_050.png"
+  },
+  {
+    "id": 66,
+    "name": "Nectar",
+    "karma": "22",
+    "stats1": "Max HP (GOOD)",
+    "stats2": "HP Recovery",
+    "stats3": "",
+    "icon": "item_051.png"
+  },
+  {
+    "id": 67,
+    "name": "Amrita",
+    "karma": "32",
+    "stats1": "Max HP (GOOD)",
+    "stats2": "HP Recovery (GOOD)",
+    "stats3": "",
+    "icon": "item_052.png"
+  },
+  {
+    "id": 68,
+    "name": "Ambrosia",
+    "karma": "52",
+    "stats1": "Max HP (EPIC)",
+    "stats2": "HP Recovery (EPIC)",
+    "stats3": "",
+    "icon": "item_053.png"
+  },
+  {
+    "id": 69,
+    "name": "Numbnessrelieving Medicine",
+    "karma": "29",
+    "stats1": "Paralysis Resistance (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_054.png"
+  },
+  {
+    "id": 70,
+    "name": "Eye Medicine",
+    "karma": "30",
+    "stats1": "Blind Resistance (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_055.png"
+  },
+  {
+    "id": 71,
+    "name": "Hemostatic",
+    "karma": "34",
+    "stats1": "Bleeding Resistance (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_056.png"
+  },
+  {
+    "id": 72,
+    "name": "Holy Water",
+    "karma": "26",
+    "stats1": "Petrifaction Resistance (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_057.png"
+  },
+  {
+    "id": 73,
+    "name": "Antitoxin",
+    "karma": "35",
+    "stats1": "Poison Resistance (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_058.png"
+  },
+  {
+    "id": 74,
+    "name": "Technique Sealing Medal",
+    "karma": "55",
+    "stats1": "Blind Resistance (GOOD)",
+    "stats2": "Petrifaction Resistance (GOOD)",
+    "stats3": "Paralysis Resistance (GOOD)",
+    "icon": "item_059.png"
+  },
+  {
+    "id": 75,
+    "name": "Wonder Drug Fruit",
+    "karma": "16",
+    "stats1": "Use Speed",
+    "stats2": "Magical Power",
+    "stats3": "Guard Durability",
+    "icon": "item_060.png"
+  },
+  {
+    "id": 76,
+    "name": "Wooden Skull",
+    "karma": "13",
+    "stats1": "Magical Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_061.png"
+  },
+  {
+    "id": 77,
+    "name": "Silver Skull",
+    "karma": "23",
+    "stats1": "Magical Power (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_062.png"
+  },
+  {
+    "id": 78,
+    "name": "Gold Skull",
+    "karma": "33",
+    "stats1": "Magical Power (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_063.png"
+  },
+  {
+    "id": 79,
+    "name": "Diary Fragment",
+    "karma": "55",
+    "stats1": "Gradual Recovery (GOOD)",
+    "stats2": "Experience Earned (GOOD)",
+    "stats3": "",
+    "icon": "item_064.png"
+  },
+  {
+    "id": 80,
+    "name": "Goblin's Stone Plate",
+    "karma": "6",
+    "stats1": "Petrifaction Resistance",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_065.png"
+  },
+  {
+    "id": 83,
+    "name": "Wooden Boomerang",
+    "karma": "24",
+    "stats1": "Attack Power",
+    "stats2": "Magical Power",
+    "stats3": "",
+    "icon": "item_066.png"
+  },
+  {
+    "id": 85,
+    "name": "Vijaya",
+    "karma": "34",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Magical Power",
+    "stats3": "",
+    "icon": "item_067.png"
+  },
+  {
+    "id": 87,
+    "name": "Throwing Knives",
+    "karma": "28",
+    "stats1": "Weight Reduction",
+    "stats2": "Attack Power",
+    "stats3": "",
+    "icon": "item_068.png"
+  },
+  {
+    "id": 88,
+    "name": "Atega",
+    "karma": "22",
+    "stats1": "Coins Earned",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_069.png"
+  },
+  {
+    "id": 89,
+    "name": "Tozupa",
+    "karma": "45",
+    "stats1": "Coins Earned",
+    "stats2": "Experience Earned",
+    "stats3": "",
+    "icon": "item_070.png"
+  },
+  {
+    "id": 90,
+    "name": "Erameld",
+    "karma": "55",
+    "stats1": "Coins Earned (GOOD)",
+    "stats2": "Experience Earned",
+    "stats3": "",
+    "icon": "item_071.png"
+  },
+  {
+    "id": 91,
+    "name": "Sirpphae",
+    "karma": "65",
+    "stats1": "Coins Earned (GOOD)",
+    "stats2": "Experience Earned (GOOD)",
+    "stats3": "",
+    "icon": "item_072.png"
+  },
+  {
+    "id": 92,
+    "name": "Byru",
+    "karma": "15",
+    "stats1": "Coins Earned (EPIC)",
+    "stats2": "Experience Earned (GOOD)",
+    "stats3": "",
+    "icon": "item_073.png"
+  },
+  {
+    "id": 93,
+    "name": "Daimond",
+    "karma": "85",
+    "stats1": "Coins Earned (EPIC)",
+    "stats2": "Experience Earned (EPIC)",
+    "stats3": "",
+    "icon": "item_074.png"
+  },
+  {
+    "id": 100,
+    "name": "Refining Kit",
+    "karma": "19",
+    "stats1": "Effect Duration",
+    "stats2": "Blind Resistance",
+    "stats3": "",
+    "icon": "item_075.png"
+  },
+  {
+    "id": 101,
+    "name": "Physical Fitness Card",
+    "karma": "24",
+    "stats1": "Max HP",
+    "stats2": "Max HP (GOOD)",
+    "stats3": "",
+    "icon": "item_076.png"
+  },
+  {
+    "id": 102,
+    "name": "Stamina Card",
+    "karma": "16",
+    "stats1": "Max ST",
+    "stats2": "Max ST (GOOD)",
+    "stats3": "",
+    "icon": "item_077.png"
+  },
+  {
+    "id": 103,
+    "name": "Attack Power Card",
+    "karma": "32",
+    "stats1": "Attack Power",
+    "stats2": "Attack Power (GOOD)",
+    "stats3": "",
+    "icon": "item_078.png"
+  },
+  {
+    "id": 104,
+    "name": "Defense Power Card",
+    "karma": "26",
+    "stats1": "Defense Power",
+    "stats2": "Defense Power (GOOD)",
+    "stats3": "",
+    "icon": "item_079.png"
+  },
+  {
+    "id": 105,
+    "name": "Magical Power Card",
+    "karma": "36",
+    "stats1": "Magical Power",
+    "stats2": "Magical Power (GOOD)",
+    "stats3": "",
+    "icon": "item_080.png"
+  },
+  {
+    "id": 106,
+    "name": "Good Fortune Card",
+    "karma": "54",
+    "stats1": "Coins Earned",
+    "stats2": "Coins Earned (GOOD)",
+    "stats3": "",
+    "icon": "item_081.png"
+  },
+  {
+    "id": 107,
+    "name": "Agility Card",
+    "karma": "44",
+    "stats1": "Weight Reduction",
+    "stats2": "Weight Reduction (GOOD)",
+    "stats3": "",
+    "icon": "item_082.png"
+  },
+  {
+    "id": 108,
+    "name": "Adaption Card",
+    "karma": "26",
+    "stats1": "Adaptability",
+    "stats2": "Adaptability (GOOD)",
+    "stats3": "",
+    "icon": "item_083.png"
+  },
+  {
+    "id": 113,
+    "name": "Cobweb",
+    "karma": "8",
+    "stats1": "Adaptability",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_084.png"
+  },
+  {
+    "id": 114,
+    "name": "Bat Wings",
+    "karma": "11",
+    "stats1": "Attack Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_085.png"
+  },
+  {
+    "id": 115,
+    "name": "Revolting Meat",
+    "karma": "10",
+    "stats1": "Blind Resistance",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_086.png"
+  },
+  {
+    "id": 116,
+    "name": "Mandragora",
+    "karma": "6",
+    "stats1": "ST Gain Rate",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_087.png"
+  },
+  {
+    "id": 117,
+    "name": "Tadpole",
+    "karma": "5",
+    "stats1": "HP Recovery",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_088.png"
+  },
+  {
+    "id": 118,
+    "name": "Poinsettia",
+    "karma": "25",
+    "stats1": "Magical Power",
+    "stats2": "Gradual Recovery",
+    "stats3": "",
+    "icon": "item_089.png"
+  },
+  {
+    "id": 119,
+    "name": "Filthy Fang",
+    "karma": "23",
+    "stats1": "Poison Resistance",
+    "stats2": "Defense Power",
+    "stats3": "",
+    "icon": "item_090.png"
+  },
+  {
+    "id": 121,
+    "name": "Lava Pebble",
+    "karma": "31",
+    "stats1": "Defense Power",
+    "stats2": "Experience Earned",
+    "stats3": "",
+    "icon": "item_091.png"
+  },
+  {
+    "id": 122,
+    "name": "Putrid Gill",
+    "karma": "19",
+    "stats1": "HP Recovery",
+    "stats2": "Bleeding Resistance",
+    "stats3": "",
+    "icon": "item_092.png"
+  },
+  {
+    "id": 123,
+    "name": "Demon Horn",
+    "karma": "21",
+    "stats1": "Gradual Recovery",
+    "stats2": "Paralysis Resistance",
+    "stats3": "",
+    "icon": "item_093.png"
+  },
+  {
+    "id": 124,
+    "name": "Golem Fragment",
+    "karma": "18",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_094.png"
+  },
+  {
+    "id": 125,
+    "name": "Small Empty Bottle",
+    "karma": "8",
+    "stats1": "Adaptability",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_095.png"
+  },
+  {
+    "id": 126,
+    "name": "Strawberry Jam",
+    "karma": "98",
+    "stats1": "Poison Resistance (EPIC)",
+    "stats2": "Bleeding Resistance (EPIC)",
+    "stats3": "Paralysis Resistance (EPIC)",
+    "icon": "item_096.png"
+  },
+  {
+    "id": 127,
+    "name": "Jam Roll",
+    "karma": "58",
+    "stats1": "Max HP (EPIC)",
+    "stats2": "HP Recovery (GOOD)",
+    "stats3": "ST Gain Rate (GOOD)",
+    "icon": "item_097.png"
+  },
+  {
+    "id": 128,
+    "name": "SoftServe Ice Cream",
+    "karma": "44",
+    "stats1": "Use Speed (GOOD)",
+    "stats2": "Effect Duration (GOOD)",
+    "stats3": "Magical Power",
+    "icon": "item_098.png"
+  },
+  {
+    "id": 129,
+    "name": "Strawberry Au Lait",
+    "karma": "63",
+    "stats1": "Weight Reduction (GOOD)",
+    "stats2": "Magical Power (GOOD)",
+    "stats3": "Max ST (GOOD)",
+    "icon": "item_099.png"
+  },
+  {
+    "id": 130,
+    "name": "Cactus Fruit",
+    "karma": "15",
+    "stats1": "HP Recovery (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_100.png"
+  },
+  {
+    "id": 131,
+    "name": "Legendary Herb",
+    "karma": "54",
+    "stats1": "Max HP (GOOD)",
+    "stats2": "HP Recovery (GOOD)",
+    "stats3": "Gradual Recovery (GOOD)",
+    "icon": "item_101.png"
+  },
+  {
+    "id": 132,
+    "name": "Bomb",
+    "karma": "19",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "Guard Durability",
+    "stats3": "",
+    "icon": "item_102.png"
+  },
+  {
+    "id": 133,
+    "name": "Gunpowder",
+    "karma": "50",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Paralysis Resistance (GOOD)",
+    "stats3": "Blind Resistance",
+    "icon": "item_103.png"
+  },
+  {
+    "id": 136,
+    "name": "Pure White Garment",
+    "karma": "70",
+    "stats1": "Max ST (EPIC)",
+    "stats2": "HP Recovery (EPIC)",
+    "stats3": "Use Speed (EPIC)",
+    "icon": "item_104.png"
+  },
+  {
+    "id": 137,
+    "name": "The Priest's Diary",
+    "karma": "36",
+    "stats1": "Max ST (GOOD)",
+    "stats2": "Magical Power (GOOD)",
+    "stats3": "",
+    "icon": "item_105.png"
+  },
+  {
+    "id": 138,
+    "name": "Pancakes",
+    "karma": "29",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "Use Speed",
+    "stats3": "Effect Duration",
+    "icon": "item_106.png"
+  },
+  {
+    "id": 139,
+    "name": "Plain Cookies",
+    "karma": "41",
+    "stats1": "Attack Power",
+    "stats2": "Magical Power",
+    "stats3": "Weight Reduction",
+    "icon": "item_107.png"
+  },
+  {
+    "id": 140,
+    "name": "Jam Cookie",
+    "karma": "5",
+    "stats1": "Defense Power (EPIC)",
+    "stats2": "Use Speed (EPIC)",
+    "stats3": "Guard Durability",
+    "icon": "item_108.png"
+  },
+  {
+    "id": 141,
+    "name": "Matcha Au Lait",
+    "karma": "67",
+    "stats1": "Use Speed (EPIC)",
+    "stats2": "Weight Reduction (GOOD)",
+    "stats3": "Defense Power (GOOD)",
+    "icon": "item_109.png"
+  },
+  {
+    "id": 142,
+    "name": "Strawberry Ice Cream",
+    "karma": "63",
+    "stats1": "Guard Durability (EPIC)",
+    "stats2": "Effect Duration (EPIC)",
+    "stats3": "Magical Power",
+    "icon": "item_110.png"
+  },
+  {
+    "id": 143,
+    "name": "Soft Serve Matcha Ice Cream",
+    "karma": "66",
+    "stats1": "Attack Power (EPIC)",
+    "stats2": "Magical Power (GOOD)",
+    "stats3": "Use Speed (GOOD)",
+    "icon": "item_111.png"
+  },
+  {
+    "id": 145,
+    "name": "Hawk Feather",
+    "karma": "27",
+    "stats1": "Weight Reduction (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_112.png"
+  },
+  {
+    "id": 146,
+    "name": "Turtle Shell",
+    "karma": "11",
+    "stats1": "Guard Durability (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_113.png"
+  },
+  {
+    "id": 147,
+    "name": "Crab Stick",
+    "karma": "15",
+    "stats1": "HP Recovery (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_114.png"
+  },
+  {
+    "id": 148,
+    "name": "Sashimi",
+    "karma": "13",
+    "stats1": "Max ST (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_115.png"
+  },
+  {
+    "id": 149,
+    "name": "Monkfish Liver",
+    "karma": "22",
+    "stats1": "Gradual Recovery (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_116.png"
+  },
+  {
+    "id": 155,
+    "name": "Apples from the King's Castle",
+    "karma": "54",
+    "stats1": "HP Recovery (GOOD)",
+    "stats2": "Max HP (GOOD)",
+    "stats3": "Gradual Recovery (GOOD)",
+    "icon": "item_117.png"
+  },
+  {
+    "id": 159,
+    "name": "Claystones",
+    "karma": "25",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "Max HP",
+    "stats3": "",
+    "icon": "item_118.png"
+  },
+  {
+    "id": 160,
+    "name": "Minotaur's Axe",
+    "karma": "13",
+    "stats1": "Guard Durability (GOOD)",
+    "stats2": "Use Speed",
+    "stats3": "",
+    "icon": "item_119.png"
+  },
+  {
+    "id": 161,
+    "name": "Mammon's Feet",
+    "karma": "28",
+    "stats1": "ST Gain Rate (GOOD)",
+    "stats2": "Gradual Recovery",
+    "stats3": "",
+    "icon": "item_120.png"
+  },
+  {
+    "id": 162,
+    "name": "Lizard Scales",
+    "karma": "36",
+    "stats1": "Effect Duration (GOOD)",
+    "stats2": "Weight Reduction",
+    "stats3": "",
+    "icon": "item_121.png"
+  },
+  {
+    "id": 163,
+    "name": "Gargoyle's Wings",
+    "karma": "40",
+    "stats1": "Poison Resistance (GOOD)",
+    "stats2": "Poison Resistance",
+    "stats3": "",
+    "icon": "item_122.png"
+  },
+  {
+    "id": 164,
+    "name": "Heat Exhaust Organ",
+    "karma": "25",
+    "stats1": "Blind Resistance (GOOD)",
+    "stats2": "HP Recovery",
+    "stats3": "",
+    "icon": "item_123.png"
+  },
+  {
+    "id": 165,
+    "name": "Sponge Cake",
+    "karma": "12",
+    "stats1": "Max HP",
+    "stats2": "HP Recovery",
+    "stats3": "",
+    "icon": "item_124.png"
+  },
+  {
+    "id": 166,
+    "name": "Pie Dough",
+    "karma": "12",
+    "stats1": "Use Speed",
+    "stats2": "Effect Duration",
+    "stats3": "Guard Durability",
+    "icon": "item_125.png"
+  },
+  {
+    "id": 167,
+    "name": "Strawberry Crepe",
+    "karma": "45",
+    "stats1": "ST Gain Rate (GOOD)",
+    "stats2": "Guard Durability (GOOD)",
+    "stats3": "Defense Power (GOOD)",
+    "icon": "item_126.png"
+  },
+  {
+    "id": 168,
+    "name": "Shortcake",
+    "karma": "57",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Effect Duration (GOOD)",
+    "stats3": "Max HP (GOOD)",
+    "icon": "item_127.png"
+  },
+  {
+    "id": 169,
+    "name": "Chocolate cake",
+    "karma": "64",
+    "stats1": "Poison Resistance (GOOD)",
+    "stats2": "Blind Resistance (GOOD)",
+    "stats3": "Paralysis Resistance (GOOD)",
+    "icon": "item_128.png"
+  },
+  {
+    "id": 170,
+    "name": "Delicious Cake",
+    "karma": "40",
+    "stats1": "Petrifaction Resistance (GOOD)",
+    "stats2": "Bleeding Resistance (GOOD)",
+    "stats3": "",
+    "icon": "item_129.png"
+  },
+  {
+    "id": 171,
+    "name": "Decorative Cake",
+    "karma": "86",
+    "stats1": "Defense Power (EPIC)",
+    "stats2": "Guard Durability (EPIC)",
+    "stats3": "Weight Reduction (EPIC)",
+    "icon": "item_130.png"
+  },
+  {
+    "id": 172,
+    "name": "Sapodilla Fruit",
+    "karma": "20",
+    "stats1": "HP Recovery",
+    "stats2": "HP Recovery (GOOD)",
+    "stats3": "",
+    "icon": "item_131.png"
+  },
+  {
+    "id": 173,
+    "name": "Empty Bottle",
+    "karma": "18",
+    "stats1": "Adaptability (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_132.png"
+  },
+  {
+    "id": 175,
+    "name": "Claylike Silver Stones",
+    "karma": "38",
+    "stats1": "Max ST (GOOD)",
+    "stats2": "Poison Resistance (GOOD)",
+    "stats3": "",
+    "icon": "item_133.png"
+  },
+  {
+    "id": 176,
+    "name": "Claylike Gold Stones",
+    "karma": "52",
+    "stats1": "Max ST (EPIC)",
+    "stats2": "Paralysis Resistance (EPIC)",
+    "stats3": "",
+    "icon": "item_134.png"
+  },
+  {
+    "id": 177,
+    "name": "Key Mold A",
+    "karma": "8",
+    "stats1": "Defense Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_135.png"
+  },
+  {
+    "id": 178,
+    "name": "Key Mold B",
+    "karma": "18",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_136.png"
+  },
+  {
+    "id": 179,
+    "name": "Stone Pickaxe",
+    "karma": "19",
+    "stats1": "Effect Duration (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_137.png"
+  },
+  {
+    "id": 180,
+    "name": "Iron Pickaxe",
+    "karma": "29",
+    "stats1": "Effect Duration (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_138.png"
+  },
+  {
+    "id": 193,
+    "name": "Tufted Fruit",
+    "karma": "40",
+    "stats1": "HP Recovery (GOOD)",
+    "stats2": "HP Recovery (EPIC)",
+    "stats3": "",
+    "icon": "item_139.png"
+  },
+  {
+    "id": 198,
+    "name": "Mochi",
+    "karma": "40",
+    "stats1": "Petrifaction Resistance",
+    "stats2": "Paralysis Resistance (GOOD)",
+    "stats3": "Poison Resistance",
+    "icon": "item_140.png"
+  },
+  {
+    "id": 199,
+    "name": "Red Bean Jam",
+    "karma": "66",
+    "stats1": "Blind Resistance (EPIC)",
+    "stats2": "Petrifaction Resistance (EPIC)",
+    "stats3": "Blind Resistance",
+    "icon": "item_141.png"
+  },
+  {
+    "id": 200,
+    "name": "Cream Puff",
+    "karma": "28",
+    "stats1": "Max HP (GOOD)",
+    "stats2": "HP Recovery",
+    "stats3": "ST Gain Rate",
+    "icon": "item_142.png"
+  },
+  {
+    "id": 211,
+    "name": "Small Waterfilled Bottle",
+    "karma": "20",
+    "stats1": "Adaptability",
+    "stats2": "Gradual Recovery",
+    "stats3": "",
+    "icon": "item_143.png"
+  },
+  {
+    "id": 212,
+    "name": "Waterfilled Bottle",
+    "karma": "40",
+    "stats1": "Adaptability (GOOD)",
+    "stats2": "Gradual Recovery (GOOD)",
+    "stats3": "",
+    "icon": "item_144.png"
+  },
+  {
+    "id": 217,
+    "name": "Large Empty Bottle",
+    "karma": "28",
+    "stats1": "Adaptability (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_145.png"
+  },
+  {
+    "id": 218,
+    "name": "Large Waterfilled Bottle",
+    "karma": "60",
+    "stats1": "Adaptability (EPIC)",
+    "stats2": "Gradual Recovery (EPIC)",
+    "stats3": "",
+    "icon": "item_146.png"
+  },
+  {
+    "id": 222,
+    "name": "Slime Jelly",
+    "karma": "36",
+    "stats1": "Max HP (GOOD)",
+    "stats2": "Paralysis Resistance (GOOD)",
+    "stats3": "",
+    "icon": "item_147.png"
+  },
+  {
+    "id": 223,
+    "name": "Penguin's Egg",
+    "karma": "31",
+    "stats1": "Blind Resistance (GOOD)",
+    "stats2": "Guard Durability (GOOD)",
+    "stats3": "",
+    "icon": "item_148.png"
+  },
+  {
+    "id": 224,
+    "name": "Clean Ice",
+    "karma": "34",
+    "stats1": "Adaptability (GOOD)",
+    "stats2": "Petrifaction Resistance (GOOD)",
+    "stats3": "",
+    "icon": "item_149.png"
+  },
+  {
+    "id": 225,
+    "name": "Yeti's Fur",
+    "karma": "45",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Bleeding Resistance (GOOD)",
+    "stats3": "",
+    "icon": "item_150.png"
+  },
+  {
+    "id": 226,
+    "name": "Shield of Rispadar",
+    "karma": "5",
+    "stats1": "Defense Power (GOOD)",
+    "stats2": "Experience Earned (GOOD)",
+    "stats3": "",
+    "icon": "item_151.png"
+  },
+  {
+    "id": 227,
+    "name": "Slice of Ancient Fish",
+    "karma": "46",
+    "stats1": "Paralysis Resistance (GOOD)",
+    "stats2": "Weight Reduction (GOOD)",
+    "stats3": "",
+    "icon": "item_152.png"
+  },
+  {
+    "id": 228,
+    "name": "Godly Wings",
+    "karma": "47",
+    "stats1": "HP Recovery (GOOD)",
+    "stats2": "Coins Earned (GOOD)",
+    "stats3": "",
+    "icon": "item_153.png"
+  },
+  {
+    "id": 229,
+    "name": "Mirror Fragment",
+    "karma": "38",
+    "stats1": "Gradual Recovery (GOOD)",
+    "stats2": "ST Gain Rate (GOOD)",
+    "stats3": "",
+    "icon": "item_154.png"
+  },
+  {
+    "id": 230,
+    "name": "Magical Jar",
+    "karma": "43",
+    "stats1": "Magical Power (GOOD)",
+    "stats2": "Blind Resistance (GOOD)",
+    "stats3": "",
+    "icon": "item_155.png"
+  },
+  {
+    "id": 231,
+    "name": "Grasshopper's Wings",
+    "karma": "37",
+    "stats1": "Weight Reduction (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_156.png"
+  },
+  {
+    "id": 232,
+    "name": "Insect Feet",
+    "karma": "28",
+    "stats1": "Defense Power (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_157.png"
+  },
+  {
+    "id": 233,
+    "name": "Bewitched Tree Branch",
+    "karma": "33",
+    "stats1": "Magical Power (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_158.png"
+  },
+  {
+    "id": 234,
+    "name": "Beastly Tree's Fungi",
+    "karma": "26",
+    "stats1": "ST Gain Rate (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_159.png"
+  },
+  {
+    "id": 235,
+    "name": "Tough Leg Meat",
+    "karma": "27",
+    "stats1": "Max HP (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_160.png"
+  },
+  {
+    "id": 236,
+    "name": "Dual Attribute Core",
+    "karma": "23",
+    "stats1": "Max ST (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_161.png"
+  },
+  {
+    "id": 237,
+    "name": "Spider Butt",
+    "karma": "22",
+    "stats1": "Use Speed (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_162.png"
+  },
+  {
+    "id": 238,
+    "name": "Bolts",
+    "karma": "46",
+    "stats1": "Poison Resistance (EPIC)",
+    "stats2": "Attack Power",
+    "stats3": "",
+    "icon": "item_163.png"
+  },
+  {
+    "id": 239,
+    "name": "Cable",
+    "karma": "47",
+    "stats1": "Bleeding Resistance (EPIC)",
+    "stats2": "Magical Power",
+    "stats3": "",
+    "icon": "item_164.png"
+  },
+  {
+    "id": 240,
+    "name": "Gear",
+    "karma": "37",
+    "stats1": "Blind Resistance (EPIC)",
+    "stats2": "Max HP",
+    "stats3": "",
+    "icon": "item_165.png"
+  },
+  {
+    "id": 321,
+    "name": "Battery",
+    "karma": "31",
+    "stats1": "Petrifaction Resistance (EPIC)",
+    "stats2": "HP Recovery",
+    "stats3": "",
+    "icon": "item_166.png"
+  },
+  {
+    "id": 242,
+    "name": "Screws",
+    "karma": "35",
+    "stats1": "Paralysis Resistance (EPIC)",
+    "stats2": "ST Gain Rate",
+    "stats3": "",
+    "icon": "item_167.png"
+  },
+  {
+    "id": 243,
+    "name": "Heart",
+    "karma": "55",
+    "stats1": "Gradual Recovery (EPIC)",
+    "stats2": "Experience Earned",
+    "stats3": "",
+    "icon": "item_168.png"
+  },
+  {
+    "id": 244,
+    "name": "Spring",
+    "karma": "31",
+    "stats1": "Effect Duration (EPIC)",
+    "stats2": "Use Speed",
+    "stats3": "",
+    "icon": "item_169.png"
+  },
+  {
+    "id": 245,
+    "name": "Nuclear Power Reactor",
+    "karma": "50",
+    "stats1": "Coins Earned (EPIC)",
+    "stats2": "Adaptability",
+    "stats3": "",
+    "icon": "item_170.png"
+  },
+  {
+    "id": 246,
+    "name": "Crystal Pickaxe",
+    "karma": "56",
+    "stats1": "Effect Duration (EPIC)",
+    "stats2": "Weight Reduction (GOOD)",
+    "stats3": "",
+    "icon": "item_171.png"
+  },
+  {
+    "id": 247,
+    "name": "Hihilrokane",
+    "karma": "49",
+    "stats1": "Defense Power (EPIC)",
+    "stats2": "Guard Durability (EPIC)",
+    "stats3": "",
+    "icon": "item_172.png"
+  },
+  {
+    "id": 248,
+    "name": "Orichalcum",
+    "karma": "64",
+    "stats1": "Attack Power (EPIC)",
+    "stats2": "Magical Power (EPIC)",
+    "stats3": "",
+    "icon": "item_173.png"
+  },
+  {
+    "id": 250,
+    "name": "Wooden Arrows",
+    "karma": "11",
+    "stats1": "Attack Power",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_174.png"
+  },
+  {
+    "id": 253,
+    "name": "Quiver",
+    "karma": "21",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_175.png"
+  },
+  {
+    "id": 256,
+    "name": "Gunpowder Bullet",
+    "karma": "39",
+    "stats1": "Defense Power (EPIC)",
+    "stats2": "Guard Durability (GOOD)",
+    "stats3": "",
+    "icon": "item_176.png"
+  },
+  {
+    "id": 257,
+    "name": "Dango",
+    "karma": "38",
+    "stats1": "Max HP (GOOD)",
+    "stats2": "HP Recovery (GOOD)",
+    "stats3": "ST Gain Rate",
+    "icon": "item_177.png"
+  },
+  {
+    "id": 258,
+    "name": "Chocolate Cream Puff",
+    "karma": "43",
+    "stats1": "Max HP (GOOD)",
+    "stats2": "HP Recovery (GOOD)",
+    "stats3": "ST Gain Rate (GOOD)",
+    "icon": "item_178.png"
+  },
+  {
+    "id": 259,
+    "name": "Hamburger",
+    "karma": "38",
+    "stats1": "Max HP (EPIC)",
+    "stats2": "HP Recovery",
+    "stats3": "ST Gain Rate",
+    "icon": "item_179.png"
+  },
+  {
+    "id": 260,
+    "name": "Red Bean Manju",
+    "karma": "43",
+    "stats1": "Max HP (EPIC)",
+    "stats2": "HP Recovery (GOOD)",
+    "stats3": "ST Gain Rate",
+    "icon": "item_180.png"
+  },
+  {
+    "id": 261,
+    "name": "Cheesecake",
+    "karma": "39",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Guard Durability",
+    "stats3": "Weight Reduction",
+    "icon": "item_181.png"
+  },
+  {
+    "id": 262,
+    "name": "Mont Blanc",
+    "karma": "49",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Guard Durability (GOOD)",
+    "stats3": "Weight Reduction",
+    "icon": "item_182.png"
+  },
+  {
+    "id": 263,
+    "name": "Apple Pie",
+    "karma": "56",
+    "stats1": "Magical Power (GOOD)",
+    "stats2": "Weight Reduction (GOOD)",
+    "stats3": "ST Gain Rate",
+    "icon": "item_183.png"
+  },
+  {
+    "id": 264,
+    "name": "Soft Serve Chocolate Ice Cream",
+    "karma": "34",
+    "stats1": "Attack Power (EPIC)",
+    "stats2": "Use Speed",
+    "stats3": "Guard Durability",
+    "icon": "item_184.png"
+  },
+  {
+    "id": 265,
+    "name": "Chocolate Chip Cookie",
+    "karma": "43",
+    "stats1": "Defense Power (EPIC)",
+    "stats2": "Effect Duration",
+    "stats3": "ST Gain Rate",
+    "icon": "item_185.png"
+  },
+  {
+    "id": 266,
+    "name": "Chocolate Pie",
+    "karma": "63",
+    "stats1": "Magical Power (EPIC)",
+    "stats2": "Weight Reduction",
+    "stats3": "Magical Power",
+    "icon": "item_186.png"
+  },
+  {
+    "id": 267,
+    "name": "Hot Chocolate",
+    "karma": "49",
+    "stats1": "Use Speed (EPIC)",
+    "stats2": "Attack Power (GOOD)",
+    "stats3": "ST Gain Rate",
+    "icon": "item_187.png"
+  },
+  {
+    "id": 268,
+    "name": "Chocolate Cookie",
+    "karma": "60",
+    "stats1": "Effect Duration (EPIC)",
+    "stats2": "Defense Power (GOOD)",
+    "stats3": "Magical Power",
+    "icon": "item_188.png"
+  },
+  {
+    "id": 269,
+    "name": "Meat Pie",
+    "karma": "50",
+    "stats1": "Weight Reduction (EPIC)",
+    "stats2": "Use Speed (GOOD)",
+    "stats3": "Guard Durability",
+    "icon": "item_189.png"
+  },
+  {
+    "id": 270,
+    "name": "Mochi Rolled in Bean Jam",
+    "karma": "59",
+    "stats1": "ST Gain Rate (EPIC)",
+    "stats2": "Guard Durability (GOOD)",
+    "stats3": "Gradual Recovery (GOOD)",
+    "icon": "item_190.png"
+  },
+  {
+    "id": 271,
+    "name": "Candied Apple",
+    "karma": "74",
+    "stats1": "Attack Power (EPIC)",
+    "stats2": "Weight Reduction (EPIC)",
+    "stats3": "ST Gain Rate",
+    "icon": "item_191.png"
+  },
+  {
+    "id": 272,
+    "name": "Sachertorte",
+    "karma": "30",
+    "stats1": "Attack Power",
+    "stats2": "Magical Power",
+    "stats3": "ST Gain Rate",
+    "icon": "item_192.png"
+  },
+  {
+    "id": 273,
+    "name": "Valentine Cake",
+    "karma": "60",
+    "stats1": "Attack Power (GOOD)",
+    "stats2": "Magical Power (GOOD)",
+    "stats3": "ST Gain Rate (GOOD)",
+    "icon": "item_193.png"
+  },
+  {
+    "id": 274,
+    "name": "Valentine Present",
+    "karma": "90",
+    "stats1": "Attack Power (EPIC)",
+    "stats2": "Magical Power (EPIC)",
+    "stats3": "ST Gain Rate (EPIC)",
+    "icon": "item_194.png"
+  },
+  {
+    "id": 287,
+    "name": "Mokyun Doll",
+    "karma": "26",
+    "stats1": "ST Gain Rate (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_195.png"
+  },
+  {
+    "id": 296,
+    "name": "Reset Potion",
+    "karma": "33",
+    "stats1": "Magical Power (EPIC)",
+    "stats2": "",
+    "stats3": "",
+    "icon": "item_196.png"
+  },
+  {
+    "id": 317,
+    "name": "Primordial Fragment",
+    "karma": "92",
+    "stats1": "Gradual Recovery (EPIC)",
+    "stats2": "Effect Duration (EPIC)",
+    "stats3": "Attack Power (EPIC)",
+    "icon": "item_197.png"
+  },
+  {
+    "id": 318,
+    "name": "Demon God's Pickaxe",
+    "karma": "68",
+    "stats1": "Experience Earned",
+    "stats2": "Weight Reduction (EPIC)",
+    "stats3": "Defense Power",
+    "icon": "item_198.png"
+  },
+  {
+    "id": 319,
+    "name": "Dogu Fruit",
+    "karma": "42",
+    "stats1": "HP Recovery (EPIC)",
+    "stats2": "Weight Reduction",
+    "stats3": "",
+    "icon": "item_199.png"
+  }
+]

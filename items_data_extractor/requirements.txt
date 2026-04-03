@@ -1,0 +1,5 @@
+natsort==8.4.0
+numpy==2.4.3
+opencv-python==4.13.0.92
+pandas==3.0.1
+pytesseract==0.3.13
