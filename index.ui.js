@@ -137,6 +137,13 @@ function renderSide(items, desiredSet) {
 function showNoResults(msg) {
   document.getElementById("results-section").style.display = "block";
   document.getElementById("results-list").innerHTML = `<div class="no-results">${esc(msg)}</div>`;
+  document.getElementById("results-count").innerHTML = "(0)";
+}
+
+function clearResults() {
+  document.getElementById("results-list").innerHTML = "";
+  document.getElementById("results-section").style.display = "none";
+  document.getElementById("results-count").innerHTML = "(0)";
 }
 
 function setStatus(msg, show = false) {

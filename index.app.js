@@ -151,19 +151,28 @@ function runOptimizer() {
   });
 
   setOptimizerConfig();
+  clearResults();
   setStatus("Searching for optimal combinations...", true);
+
+  const findBtn = document.getElementById("find-btn");
+  findBtn.disabled = true;
+
   setTimeout(() => {
-    try {
-      const results = solve(allItems, desired, currentSortOrder);
-      setStatus("");
-      if (results.length === 0) {
-        showNoResults("No balanced combinations found with the selected stats.");
-        return;
-      }
-      showResults(results, desired);
-    } catch (e) {
-      setStatus("");
-      showNoResults("Error: " + e.message);
-    }
-  }, 30);
+    solveAsync(allItems, desired, currentSortOrder)
+      .then((results) => {
+        setStatus("");
+        if (results.length === 0) {
+          showNoResults("No balanced combinations found with the selected stats.");
+          return;
+        }
+        showResults(results, desired);
+      })
+      .catch((error) => {
+        setStatus("");
+        showNoResults("Error: " + error.message);
+      })
+      .finally(() => {
+        findBtn.disabled = false;
+      });
+  }, 1000);
 }

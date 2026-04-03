@@ -342,3 +342,97 @@ async function parseSaveFile(saveFile, allItems) {
 
   return { pans, ownedItems };
 }
+
+// ============ Web Worker Support ============
+
+let solveWorker = null;
+let solveWorkerResolvers = new Map();
+let messageIdCounter = 0;
+
+/**
+ * Initializes the solve Web Worker
+ */
+function initSolveWorker() {
+  if (typeof Worker === "undefined") {
+    console.warn("Web Workers not supported in this environment. Using sync solve.");
+    return false;
+  }
+
+  if (solveWorker) {
+    return true;
+  }
+
+  try {
+    solveWorker = new Worker("solve.worker.js");
+
+    solveWorker.onmessage = (event) => {
+      const { id, success, results, error } = event.data;
+      const resolver = solveWorkerResolvers.get(id);
+
+      if (resolver) {
+        if (success) {
+          resolver.resolve(results);
+        } else {
+          resolver.reject(new Error(error || "Worker error"));
+        }
+        solveWorkerResolvers.delete(id);
+      }
+    };
+
+    solveWorker.onerror = (error) => {
+      console.error("Worker error:", error);
+      // Reject all pending requests
+      for (const resolver of solveWorkerResolvers.values()) {
+        resolver.reject(error);
+      }
+      solveWorkerResolvers.clear();
+      solveWorker = null;
+    };
+
+    return true;
+  } catch (e) {
+    console.warn("Could not create Web Worker:", e.message);
+    return false;
+  }
+}
+
+/**
+ * Solves using Web Worker (async) if available, otherwise sync
+ * Returns a Promise that resolves with the results
+ */
+function solveAsync(pool, desired, order = "desc") {
+  const useWorker = initSolveWorker();
+
+  if (!useWorker || !solveWorker) {
+    // Fallback to sync solve
+    console.log("Using synchronous solve (no Worker support)");
+    return Promise.resolve(solve(pool, desired, order));
+  }
+
+  return new Promise((resolve, reject) => {
+    const id = ++messageIdCounter;
+
+    solveWorkerResolvers.set(id, { resolve, reject });
+
+    const config = {
+      MAX_ITEMS_LEFT,
+      MAX_ITEMS_RIGHT,
+      BALANCE_THRESHOLD,
+      MAX_FILLERS,
+      MAX_BUILDS_RETURNED,
+    };
+
+    try {
+      solveWorker.postMessage({
+        config,
+        pool,
+        desired,
+        order,
+        id,
+      });
+    } catch (e) {
+      solveWorkerResolvers.delete(id);
+      reject(e);
+    }
+  });
+}

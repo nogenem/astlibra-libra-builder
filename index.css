@@ -240,12 +240,14 @@ main {
 }
 .btn-ghost {
   background: transparent;
-  color: var(--text-dim);
-  border: 1px solid var(--border);
+  color: var(--text);
+  border: 1.5px solid var(--text-dim);
+  transition: all 0.3s ease;
 }
 .btn-ghost:hover {
-  border-color: var(--normal);
-  color: var(--normal);
+  background: rgba(183, 146, 76, 0.15);
+  border-color: var(--gold);
+  color: var(--gold);
 }
 .item-count {
   margin-top: 12px;
@@ -383,6 +385,20 @@ main {
 }
 .btn-find:active {
   transform: translateY(0);
+}
+.btn-find:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #2a1a06 0%, #4a2810 50%, #2a1a06 100%);
+  border-color: var(--gold-dim);
+  text-shadow: none;
+  box-shadow: none;
+}
+.btn-find:disabled:hover {
+  background: linear-gradient(135deg, #2a1a06 0%, #4a2810 50%, #2a1a06 100%);
+  border-color: var(--gold-dim);
+  transform: none;
+  box-shadow: none;
 }
 #status-bar {
   text-align: center;
