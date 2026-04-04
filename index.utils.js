@@ -139,7 +139,8 @@ let messageIdCounter = 0;
  * Solves using multiple Web Workers to parallelize the search
  * Returns a Promise that resolves with the results
  */
-function solveAsync(pool, desired, order = "desc") {
+function solveAsync(pool, desired, order = "desc", options = {}) {
+  const { onProgress } = options;
   const numWorkers = Math.max(4, Math.min(navigator.hardwareConcurrency || 4, 8));
 
   // Compute searchPool in main thread to ensure consistency
@@ -176,6 +177,16 @@ function solveAsync(pool, desired, order = "desc") {
   const workerPromises = [];
   const workers = [];
   const localIds = [];
+  const partialBest = [];
+
+  function mergePartialResults(newResults) {
+    partialBest.push(...newResults);
+    partialBest.sort((a, b) => (order === "asc" ? a.score - b.score : b.score - a.score));
+    const merged = partialBest.slice(0, MAX_BUILDS_RETURNED);
+    partialBest.length = 0;
+    partialBest.push(...merged);
+    return merged;
+  }
 
   for (let initCode = 0; initCode < Math.min(totalInitial, numWorkers); initCode++) {
     const initialItemsIndices = [];
@@ -235,6 +246,8 @@ function solveAsync(pool, desired, order = "desc") {
         const resolver = solveWorkerResolvers.get(msgId);
         if (resolver) {
           if (success) {
+            const merged = onProgress ? mergePartialResults(results) : null;
+            if (onProgress) onProgress({ workerId: msgId, results: merged });
             resolver.resolve(results);
           } else {
             resolver.reject(new Error(error || "Worker error"));
@@ -283,7 +296,9 @@ function solveAsync(pool, desired, order = "desc") {
     for (const id of localIds) {
       const resolver = solveWorkerResolvers.get(id);
       if (resolver) {
-        resolver.reject(new Error("Search cancelled by user"));
+        const err = new Error("Search cancelled by user");
+        err.cancelled_by_user = true;
+        resolver.reject(err);
         solveWorkerResolvers.delete(id);
       }
     }

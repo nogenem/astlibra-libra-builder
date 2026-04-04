@@ -140,7 +140,14 @@ function runOptimizer() {
 
   setTimeout(() => {
     const solveStartTime = performance.now();
-    solvePromise = solveAsync(allItems, desired, currentSortOrder);
+    solvePromise = solveAsync(allItems, desired, currentSortOrder, {
+      onProgress: ({ workerId, results }) => {
+        if (results && results.length > 0) {
+          showResults(results, desired);
+          setStatus(`Partial results from worker ${workerId} (best so far)...`, true);
+        }
+      },
+    });
 
     // Show cancel button after 10 seconds
     cancelTimeout = setTimeout(() => {
@@ -166,8 +173,13 @@ function runOptimizer() {
 
         clearTimeout(cancelTimeout);
         cancelContainer.style.display = "none";
-        setStatus("");
-        showNoResults("Error: " + error.message);
+
+        if (error.cancelled_by_user) {
+          setStatus("Search cancelled - showing partial results", true);
+        } else {
+          setStatus("");
+          showNoResults("Error: " + error.message);
+        }
       })
       .finally(() => {
         findBtn.disabled = false;
@@ -178,10 +190,6 @@ function runOptimizer() {
   cancelBtn.onclick = () => {
     if (solvePromise && solvePromise.cancel) {
       solvePromise.cancel();
-      clearTimeout(cancelTimeout);
-      cancelContainer.style.display = "none";
-      setStatus("");
-      findBtn.disabled = false;
     }
   };
 }
