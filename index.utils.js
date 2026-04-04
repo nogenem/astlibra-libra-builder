@@ -1,3 +1,11 @@
+function isLocalhost() {
+  return (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "[::1]" ||
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/.test(window.location.hostname)
+  );
+}
+
 function parseStat(s) {
   if (!s || !s.trim()) return null;
   s = s.trim();

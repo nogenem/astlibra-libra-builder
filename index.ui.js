@@ -66,6 +66,22 @@ function clearAll() {
   updateSelectedCount();
 }
 
+function selectDesiredStats(keys) {
+  desiredStatKeys.clear();
+  document.querySelectorAll(".stat-chip input").forEach((cb) => {
+    const shouldSelect = keys.includes(cb.value);
+    cb.checked = shouldSelect;
+    const chip = cb.closest(".stat-chip");
+    if (shouldSelect) {
+      desiredStatKeys.add(cb.value);
+      chip.classList.add("checked");
+    } else {
+      chip.classList.remove("checked");
+    }
+  });
+  updateSelectedCount();
+}
+
 function showResults(results, desired) {
   const section = document.getElementById("results-section");
   const list = document.getElementById("results-list");

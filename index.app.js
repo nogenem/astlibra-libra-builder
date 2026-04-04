@@ -83,6 +83,9 @@ function finishLoad(data, raw = true) {
   document.getElementById("item-count").innerHTML =
     `<strong>${allItems.length}/${originalAllItems.length}</strong> unique items loaded.`;
   buildStatSelector();
+  if (isLocalhost() && desiredStatKeysForTesting.size > 0) {
+    selectDesiredStats([...desiredStatKeysForTesting]);
+  }
   document.getElementById("stat-section").style.display = "block";
   document.getElementById("find-btn").style.display = "inline-block";
   document.getElementById("results-section").style.display = "none";
