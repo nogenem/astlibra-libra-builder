@@ -24,19 +24,6 @@ function updateInputsFromConfig() {
   document.getElementById("sort-order").value = currentSortOrder;
 }
 
-function loadFromTextarea() {
-  const txt = document.getElementById("json-input").value.trim();
-  if (!txt) {
-    alert("Paste the JSON first.");
-    return;
-  }
-  try {
-    finishLoad(JSON.parse(txt));
-  } catch (e) {
-    alert("Invalid JSON: " + e.message);
-  }
-}
-
 function loadDefaultJson() {
   setStatus("Loading default items...", true);
   fetch("data/items.json")
@@ -52,20 +39,6 @@ function loadDefaultJson() {
       setStatus("");
       alert("Error loading default items: " + err.message);
     });
-}
-
-function loadFromFile(evt) {
-  const file = evt.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    try {
-      finishLoad(JSON.parse(e.target.result));
-    } catch (err) {
-      alert("Invalid JSON file: " + err.message);
-    }
-  };
-  reader.readAsText(file);
 }
 
 async function handleSaveFileUpload(file) {
@@ -186,6 +159,7 @@ function runOptimizer() {
       })
       .catch((error) => {
         console.log(`Solver completed in ${(performance.now() - solveStartTime) / 1000}s`);
+        console.error("Error during solving:", error);
 
         clearTimeout(cancelTimeout);
         cancelContainer.style.display = "none";

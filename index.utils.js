@@ -1,7 +1,3 @@
-function getStatKey(stat) {
-  return stat.name.toLowerCase().trim() + "|" + stat.tier;
-}
-
 function parseStat(s) {
   if (!s || !s.trim()) return null;
   s = s.trim();
@@ -37,82 +33,6 @@ function processRaw(data) {
     });
   }
   return items;
-}
-
-function solve(pool, desired, order = "desc") {
-  const statsToIndex = new Map();
-  desired.forEach((s, i) => statsToIndex.set(s.key.toLowerCase().trim(), i));
-
-  const processed = pool
-    .map((item) => {
-      let mask = 0n;
-      let score = 0;
-      item.stats.forEach((s) => {
-        const key = (s.name + "|" + s.tier).toLowerCase().trim();
-        if (statsToIndex.has(key)) {
-          mask |= 1n << BigInt(statsToIndex.get(key));
-        }
-        score += s.score;
-      });
-      return { ...item, mask, score };
-    })
-    .sort((a, b) => b.score - a.score);
-
-  const desiredMask = (1n << BigInt(desired.length)) - 1n;
-  const maxSlots = MAX_ITEMS_LEFT + MAX_ITEMS_RIGHT;
-
-  // We increase the pool to guarantee that no combination is missing
-  // Stats items + top MAX_FILLERS fillers to guarantee volume
-  const baseItems = processed.filter((i) => (i.mask & desiredMask) !== 0n);
-  const fillers = processed.filter((i) => (i.mask & desiredMask) === 0n).slice(0, MAX_FILLERS);
-  const searchPool = [...baseItems, ...fillers];
-
-  const itemCount = searchPool.length;
-  const karmaArr = new Uint32Array(searchPool.map((i) => i.karma));
-  const maskArr = new BigUint64Array(searchPool.map((i) => i.mask));
-  const scoreArr = new Uint32Array(searchPool.map((i) => i.score));
-
-  const suffixMasks = new BigUint64Array(itemCount + 1);
-  for (let i = itemCount - 1; i >= 0; i--) suffixMasks[i] = suffixMasks[i + 1] | maskArr[i];
-
-  const results = [];
-  const currentComboIndices = new Int32Array(maxSlots);
-
-  function search(idx, count, currentMask, currentKarma, currentScore) {
-    // If the mask is complete, it's already a candidate (no need to wait to fill all 10 slots)
-    if ((currentMask & desiredMask) === desiredMask) {
-      const items = [];
-      for (let i = 0; i < count; i++) items.push(searchPool[currentComboIndices[i]]);
-
-      const balanceResult = findBestBalance(items);
-      if (balanceResult) {
-        results.push({ ...balanceResult, score: currentScore, mask: currentMask });
-        // If the volume of results is too high, we stop to maintain performance
-        if (results.length > 1000) return;
-      }
-    }
-
-    if (idx >= itemCount || count >= maxSlots) return;
-
-    // Mask pruning: If what remains doesn't complete the goal, exit.
-    if ((currentMask | (suffixMasks[idx] & desiredMask)) !== desiredMask) return;
-
-    // Decision 1: Include (Priority for items with score)
-    currentComboIndices[count] = idx;
-    search(idx + 1, count + 1, currentMask | maskArr[idx], currentKarma + karmaArr[idx], currentScore + scoreArr[idx]);
-
-    // Decision 2: Skip
-    search(idx + 1, count, currentMask, currentKarma, currentScore);
-  }
-
-  search(0, 0, 0n, 0, 0);
-
-  // Sorting and cleanup
-  const finalBuilds = results
-    .sort((a, b) => (order === "asc" ? a.score - b.score : b.score - a.score))
-    .slice(0, MAX_BUILDS_RETURNED);
-
-  return finalBuilds;
 }
 
 function findBestBalance(items) {
@@ -204,125 +124,162 @@ async function parseSaveFile(saveFile, allItems) {
 
 // ============ Web Worker Support ============
 
-let solveWorker = null;
 let solveWorkerResolvers = new Map();
 let messageIdCounter = 0;
 
 /**
- * Initializes the solve Web Worker
- */
-function initSolveWorker() {
-  if (typeof Worker === "undefined") {
-    console.warn("Web Workers not supported in this environment. Using sync solve.");
-    return false;
-  }
-
-  if (solveWorker) {
-    return true;
-  }
-
-  try {
-    solveWorker = new Worker("solve.worker.js");
-
-    solveWorker.onmessage = (event) => {
-      const { id, success, results, error } = event.data;
-      const resolver = solveWorkerResolvers.get(id);
-
-      if (resolver) {
-        if (success) {
-          resolver.resolve(results);
-        } else {
-          resolver.reject(new Error(error || "Worker error"));
-        }
-        solveWorkerResolvers.delete(id);
-      }
-    };
-
-    solveWorker.onerror = (error) => {
-      console.error("Worker error:", error);
-      // Reject all pending requests
-      for (const resolver of solveWorkerResolvers.values()) {
-        resolver.reject(error);
-      }
-      solveWorkerResolvers.clear();
-      solveWorker = null;
-    };
-
-    return true;
-  } catch (e) {
-    console.warn("Could not create Web Worker:", e.message);
-    return false;
-  }
-}
-
-/**
- * Resets the Web Worker (terminates and clears references)
- */
-function resetSolveWorker() {
-  if (solveWorker) {
-    try {
-      solveWorker.terminate();
-    } catch (e) {
-      console.warn("Error terminating worker:", e.message);
-    }
-    solveWorker = null;
-  }
-  solveWorkerResolvers.clear();
-}
-
-/**
- * Solves using Web Worker (async) if available, otherwise sync
+ * Solves using multiple Web Workers to parallelize the search
  * Returns a Promise that resolves with the results
  */
 function solveAsync(pool, desired, order = "desc") {
-  const useWorker = initSolveWorker();
+  const numWorkers = Math.max(4, Math.min(navigator.hardwareConcurrency || 4, 8));
 
-  if (!useWorker || !solveWorker) {
-    // Fallback to sync solve
-    console.log("Using synchronous solve (no Worker support)");
-    return Promise.resolve(solve(pool, desired, order));
+  // Compute searchPool in main thread to ensure consistency
+  const statsToIndex = new Map();
+  desired.forEach((s, i) => statsToIndex.set(s.key.toLowerCase().trim(), i));
+
+  const processed = pool
+    .map((item) => {
+      let mask = 0n;
+      let score = 0;
+      item.stats.forEach((s) => {
+        const key = (s.name + "|" + s.tier).toLowerCase().trim();
+        if (statsToIndex.has(key)) {
+          mask |= 1n << BigInt(statsToIndex.get(key));
+        }
+        score += s.score;
+      });
+      return { ...item, mask, score };
+    })
+    .sort((a, b) => b.score - a.score);
+
+  const desiredMask = (1n << BigInt(desired.length)) - 1n;
+  const baseItems = processed.filter((i) => (i.mask & desiredMask) !== 0n);
+  const fillers = processed.filter((i) => (i.mask & desiredMask) === 0n).slice(0, MAX_FILLERS);
+  const searchPool = [...baseItems, ...fillers];
+
+  const splitDepth = Math.min(3, searchPool.length);
+  let actualSplitDepth = splitDepth;
+  while (1 << actualSplitDepth > numWorkers && actualSplitDepth > 0) actualSplitDepth--;
+  const totalInitial = 1 << actualSplitDepth;
+
+  console.log({ poolLen: pool.length, searchPoolLen: searchPool.length, numWorkers, totalInitial, actualSplitDepth });
+
+  const workerPromises = [];
+  const workers = [];
+  const localIds = [];
+
+  for (let initCode = 0; initCode < Math.min(totalInitial, numWorkers); initCode++) {
+    const initialItemsIndices = [];
+    let initialMask = 0n;
+    let initialCount = 0;
+    let initialKarma = 0;
+    let initialScore = 0;
+
+    for (let j = 0; j < actualSplitDepth; j++) {
+      if (initCode & (1 << j)) {
+        const item = searchPool[j];
+        initialItemsIndices.push(j);
+        initialMask |= item.mask;
+        initialCount++;
+        initialKarma += item.karma;
+        initialScore += item.score;
+      }
+    }
+
+    const promise = new Promise((resolve, reject) => {
+      const worker = new Worker("solve.worker.js");
+      workers.push(worker);
+      const id = ++messageIdCounter;
+      localIds.push(id);
+
+      solveWorkerResolvers.set(id, { resolve, reject });
+
+      const config = {
+        MAX_ITEMS_LEFT,
+        MAX_ITEMS_RIGHT,
+        BALANCE_THRESHOLD,
+        MAX_FILLERS,
+        MAX_BUILDS_RETURNED,
+      };
+
+      try {
+        worker.postMessage({
+          config,
+          pool,
+          desired,
+          order,
+          id,
+          initialMask: initialMask.toString(),
+          initialCount,
+          initialKarma,
+          initialScore,
+          initialItemsIndices,
+          splitDepth: actualSplitDepth,
+        });
+      } catch (e) {
+        solveWorkerResolvers.delete(id);
+        reject(e);
+      }
+
+      worker.onmessage = (event) => {
+        const { id: msgId, success, results, error } = event.data;
+        const resolver = solveWorkerResolvers.get(msgId);
+        if (resolver) {
+          if (success) {
+            resolver.resolve(results);
+          } else {
+            resolver.reject(new Error(error || "Worker error"));
+          }
+          solveWorkerResolvers.delete(msgId);
+        }
+      };
+
+      worker.onerror = (error) => {
+        console.error("Worker error:", error);
+        reject(error);
+      };
+    });
+
+    workerPromises.push(promise);
   }
 
-  let pendingId = null;
+  function terminateWorkers(workerList) {
+    workerList.forEach((w) => {
+      try {
+        w.terminate();
+      } catch (e) {
+        console.warn("Error terminating worker:", e.message);
+      }
+    });
+  }
 
-  const promise = new Promise((resolve, reject) => {
-    const id = ++messageIdCounter;
-    pendingId = id;
+  const masterPromise = Promise.all(workerPromises)
+    .then((allResults) => {
+      const combinedResults = allResults.flat();
+      const finalBuilds = combinedResults
+        .sort((a, b) => (order === "asc" ? a.score - b.score : b.score - a.score))
+        .slice(0, MAX_BUILDS_RETURNED);
 
-    solveWorkerResolvers.set(id, { resolve, reject });
+      terminateWorkers(workers);
 
-    const config = {
-      MAX_ITEMS_LEFT,
-      MAX_ITEMS_RIGHT,
-      BALANCE_THRESHOLD,
-      MAX_FILLERS,
-      MAX_BUILDS_RETURNED,
-    };
+      return finalBuilds;
+    })
+    .catch((error) => {
+      terminateWorkers(workers);
+      throw error;
+    });
 
-    try {
-      solveWorker.postMessage({
-        config,
-        pool,
-        desired,
-        order,
-        id,
-      });
-    } catch (e) {
-      solveWorkerResolvers.delete(id);
-      reject(e);
+  masterPromise.cancel = () => {
+    terminateWorkers(workers);
+    for (const id of localIds) {
+      const resolver = solveWorkerResolvers.get(id);
+      if (resolver) {
+        resolver.reject(new Error("Search cancelled by user"));
+        solveWorkerResolvers.delete(id);
+      }
     }
-  });
-
-  // Attach cancel method to the promise
-  promise.cancel = () => {
-    if (pendingId && solveWorkerResolvers.has(pendingId)) {
-      const resolver = solveWorkerResolvers.get(pendingId);
-      resolver.reject(new Error("Search cancelled by user"));
-      solveWorkerResolvers.delete(pendingId);
-    }
-    // Reset worker to stop processing
-    resetSolveWorker();
   };
 
-  return promise;
+  return masterPromise;
 }
