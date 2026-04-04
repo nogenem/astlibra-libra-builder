@@ -1,12 +1,3 @@
-function getItemStatsScore(item) {
-  let score = 0;
-  for (const stat of item.stats) {
-    const key = getStatKey(stat);
-    score += stat.score * (desiredStatKeys.has(key) ? 10 : 1);
-  }
-  return score;
-}
-
 function getStatKey(stat) {
   return stat.name.toLowerCase().trim() + "|" + stat.tier;
 }
@@ -48,251 +39,116 @@ function processRaw(data) {
   return items;
 }
 
-function* getKCombs(array, k) {
-  for (let i = 0; i < array.length; i++) {
-    if (k === 1) yield [array[i]];
-    else {
-      for (let next of getKCombs(array.slice(i + 1), k - 1)) {
-        yield [array[i], ...next];
-      }
-    }
-  }
-}
-
-function* cartesianProduct(arrays) {
-  const [head, ...tail] = arrays;
-  const remainder = tail.length > 0 ? cartesianProduct(tail) : [[]];
-  for (let r of remainder) {
-    for (let h of head) {
-      yield [h, ...r];
-    }
-  }
-}
-
-function* generateAllLimitedCombinations(map, limit = 10000) {
-  const keys = Array.from(map.keys());
-  const k = Math.min(keys.length, limit);
-  for (const keyCombo of getKCombs(keys, k)) {
-    const arraysToCombine = keyCombo.map((key) => map.get(key));
-    yield* cartesianProduct(arraysToCombine);
-  }
-}
-
-function getBalanceProportion(karmaL, karmaR) {
-  if (karmaL === 0 && karmaR === 0) return 1;
-  if (karmaL === 0 || karmaR === 0) return 0;
-  return Math.min(karmaL, karmaR) / Math.max(karmaL, karmaR);
-}
-
-// New functions from combinations.claude.js
-
-function buildMap(items, desiredStats) {
-  const statsMap = new Map();
-
-  // Desired stats receive the first bits (0, 1, 2, ...)
-  desiredStats.forEach((s, i) => {
-    statsMap.set(s, 1n << BigInt(i));
-  });
-
-  // Other stats receive subsequent bits
-  let nextBit = desiredStats.length;
-  for (const item of items) {
-    for (const s of item.stats.map(getStatKey)) {
-      if (!statsMap.has(s)) {
-        statsMap.set(s, 1n << BigInt(nextBit++));
-      }
-    }
-  }
-
-  return statsMap;
-}
-
-// Returns BigInt: OR of all bits of the item's stats
-function calculateMask(item, statsMap) {
-  return item.stats.map(getStatKey).reduce((acc, s) => acc | (statsMap.get(s) ?? 0n), 0n);
-}
-
-// Pre-filtering
-function preFiltering(items, statsMap, desiredMask) {
-  const base = [];
-  const fillers = [];
-
-  for (const item of items) {
-    const mask = calculateMask(item, statsMap);
-    item._mask = mask; // cache as BigInt
-
-    if ((mask & desiredMask) !== 0n) {
-      base.push(item); // has at least 1 desired stat
-    } else {
-      fillers.push(item); // only serves as weight
-    }
-  }
-
-  // Dominance: groups by mask, keeps up to 3 karma representatives per group
-  const groups = new Map();
-  for (const item of base) {
-    const key = item._mask.toString();
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(item);
-  }
-  const uniqueBase = [];
-  for (const group of groups.values()) {
-    group.sort((a, b) => a.karma - b.karma);
-    const representatives = new Set([group[0], group[group.length - 1], group[Math.floor(group.length / 2)]]);
-    representatives.forEach((item) => uniqueBase.push(item));
-  }
-
-  // Fillers: takes karma representatives (light, heavy, medium)
-  fillers.sort((a, b) => a.karma - b.karma);
-  const n = Math.max(1, Math.floor(MAX_FILLERS / 3));
-  const fillersSet = new Set([
-    ...fillers.slice(0, n),
-    ...fillers.slice(-n),
-    ...fillers.slice(Math.max(0, Math.floor(fillers.length / 2) - 1), Math.floor(fillers.length / 2) - 1 + n),
-  ]);
-
-  return { base: uniqueBase, fillers: [...fillersSet] };
-}
-
-// Phase 1 — Bases that cover the desired stats
-function generateBases(baseItems, desiredMask) {
-  const bases = [];
-  const maxBaseSize = MAX_ITEMS_LEFT + MAX_ITEMS_RIGHT;
-
-  function search(index, combo, currentMask, karma) {
-    // Checks if ALL desired bits are present
-    if ((currentMask & desiredMask) === desiredMask) {
-      bases.push({ items: [...combo], karma, mask: currentMask });
-    }
-
-    if (index >= baseItems.length || combo.length >= maxBaseSize) return;
-
-    const item = baseItems[index];
-    search(index + 1, combo, currentMask, karma); // skip
-    combo.push(item);
-    search(index + 1, combo, currentMask | item._mask, karma + item.karma); // include
-    combo.pop();
-  }
-
-  search(0, [], 0n, 0);
-  return bases;
-}
-
-// Calculate score using the stat scores
-function calculateScore(combination) {
-  let score = 0;
-  for (const item of combination) {
-    for (const s of item.stats) {
-      score += s.score;
-    }
-  }
-  return score;
-}
-
-// Phase 2 — Balances each base with fillers, adapted to return the expected format
-function balanceWithFillers(bases, fillerItems) {
-  const maxTotal = MAX_ITEMS_LEFT + MAX_ITEMS_RIGHT;
-  const results = [];
-  const seen = new Set();
-
-  // Distributes items between Left and Right trying to balance
-  function tryDistribute(allItems) {
-    const remainingKarma = new Array(allItems.length + 1).fill(0);
-    for (let i = allItems.length - 1; i >= 0; i--) {
-      remainingKarma[i] = remainingKarma[i + 1] + allItems[i].karma;
-    }
-
-    function distribute(index, leftItems, rightItems, leftKarma, rightKarma) {
-      if (index === allItems.length) {
-        if (leftItems.length === 0 || rightItems.length === 0) return;
-
-        const balance = getBalanceProportion(leftKarma, rightKarma);
-        if (balance < BALANCE_THRESHOLD) return;
-
-        const key = [
-          leftItems
-            .map((i) => i.id)
-            .sort()
-            .join(","),
-          rightItems
-            .map((i) => i.id)
-            .sort()
-            .join(","),
-        ]
-          .sort()
-          .join("|");
-        if (seen.has(key)) return;
-        seen.add(key);
-
-        results.push({
-          left: leftItems,
-          right: rightItems,
-          karmaL: leftKarma,
-          karmaR: rightKarma,
-          balance: balance,
-          score: calculateScore([...leftItems, ...rightItems]),
-        });
-        return;
-      }
-
-      const largerSide = Math.max(leftKarma, rightKarma);
-      const smallerSide = Math.min(leftKarma, rightKarma);
-      if (largerSide > 0 && (smallerSide + remainingKarma[index]) / largerSide < 0.9) return;
-
-      const item = allItems[index];
-      if (leftItems.length < MAX_ITEMS_LEFT)
-        distribute(index + 1, [...leftItems, item], rightItems, leftKarma + item.karma, rightKarma);
-      if (rightItems.length < MAX_ITEMS_RIGHT)
-        distribute(index + 1, leftItems, [...rightItems, item], leftKarma, rightKarma + item.karma);
-    }
-
-    distribute(0, [], [], 0, 0);
-  }
-
-  // Searches for filler combinations to complete each base
-  const searchFillers = (base, index, chosenFillers, fillerKarma) => {
-    const remainingSlots = maxTotal - base.items.length;
-    tryDistribute([...base.items, ...chosenFillers]);
-
-    if (index >= fillerItems.length || chosenFillers.length >= remainingSlots) return;
-
-    const filler = fillerItems[index];
-    searchFillers(base, index + 1, chosenFillers, fillerKarma);
-    chosenFillers.push(filler);
-    searchFillers(base, index + 1, chosenFillers, fillerKarma + filler.karma);
-    chosenFillers.pop();
-  };
-
-  for (const base of bases) {
-    searchFillers(base, 0, [], 0);
-  }
-
-  console.log(`Generated ${results.length} balanced combinations before sorting.`);
-  return results.sort((a, b) => b.balance - a.balance || b.score - a.score);
-}
-
 function solve(pool, desired, order = "desc") {
-  // Use desired keys directly as desiredStats
-  const desiredStats = desired.map((d) => d.key.toLowerCase().trim());
-  console.log("desiredStats:", desiredStats);
+  const statsToIndex = new Map();
+  desired.forEach((s, i) => statsToIndex.set(s.key.toLowerCase().trim(), i));
 
-  const statsMap = buildMap(pool, desiredStats);
-  console.log("statsMap size:", statsMap.size, "desired bits:", desiredStats.length);
+  const processed = pool
+    .map((item) => {
+      let mask = 0n;
+      let score = 0;
+      item.stats.forEach((s) => {
+        const key = (s.name + "|" + s.tier).toLowerCase().trim();
+        if (statsToIndex.has(key)) {
+          mask |= 1n << BigInt(statsToIndex.get(key));
+        }
+        score += s.score;
+      });
+      return { ...item, mask, score };
+    })
+    .sort((a, b) => b.score - a.score);
 
-  const desiredMask = desiredStats.reduce((acc, s) => acc | (statsMap.get(s) ?? 0n), 0n);
-  console.log("desiredMask:", desiredMask.toString(2));
+  const desiredMask = (1n << BigInt(desired.length)) - 1n;
+  const maxSlots = MAX_ITEMS_LEFT + MAX_ITEMS_RIGHT;
 
-  const { base, fillers } = preFiltering(pool, statsMap, desiredMask);
+  // We increase the pool to guarantee that no combination is missing
+  // Stats items + top MAX_FILLERS fillers to guarantee volume
+  const baseItems = processed.filter((i) => (i.mask & desiredMask) !== 0n);
+  const fillers = processed.filter((i) => (i.mask & desiredMask) === 0n).slice(0, MAX_FILLERS);
+  const searchPool = [...baseItems, ...fillers];
 
-  const bases = generateBases(base, desiredMask);
+  const itemCount = searchPool.length;
+  const karmaArr = new Uint32Array(searchPool.map((i) => i.karma));
+  const maskArr = new BigUint64Array(searchPool.map((i) => i.mask));
+  const scoreArr = new Uint32Array(searchPool.map((i) => i.score));
 
-  let builds = balanceWithFillers(bases, fillers);
+  const suffixMasks = new BigUint64Array(itemCount + 1);
+  for (let i = itemCount - 1; i >= 0; i--) suffixMasks[i] = suffixMasks[i + 1] | maskArr[i];
 
-  if (order === "asc") {
-    builds = builds.slice().reverse();
+  const results = [];
+  const currentComboIndices = new Int32Array(maxSlots);
+
+  function search(idx, count, currentMask, currentKarma, currentScore) {
+    // If the mask is complete, it's already a candidate (no need to wait to fill all 10 slots)
+    if ((currentMask & desiredMask) === desiredMask) {
+      const items = [];
+      for (let i = 0; i < count; i++) items.push(searchPool[currentComboIndices[i]]);
+
+      const balanceResult = findBestBalance(items);
+      if (balanceResult) {
+        results.push({ ...balanceResult, score: currentScore, mask: currentMask });
+        // If the volume of results is too high, we stop to maintain performance
+        if (results.length > 1000) return;
+      }
+    }
+
+    if (idx >= itemCount || count >= maxSlots) return;
+
+    // Mask pruning: If what remains doesn't complete the goal, exit.
+    if ((currentMask | (suffixMasks[idx] & desiredMask)) !== desiredMask) return;
+
+    // Decision 1: Include (Priority for items with score)
+    currentComboIndices[count] = idx;
+    search(idx + 1, count + 1, currentMask | maskArr[idx], currentKarma + karmaArr[idx], currentScore + scoreArr[idx]);
+
+    // Decision 2: Skip
+    search(idx + 1, count, currentMask, currentKarma, currentScore);
   }
 
-  return builds.slice(0, MAX_BUILDS_RETURNED);
+  search(0, 0, 0n, 0, 0);
+
+  // Sorting and cleanup
+  const finalBuilds = results
+    .sort((a, b) => (order === "asc" ? a.score - b.score : b.score - a.score))
+    .slice(0, MAX_BUILDS_RETURNED);
+
+  return finalBuilds;
+}
+
+function findBestBalance(items) {
+  const n = items.length;
+  if (n === 0) return null;
+
+  let best = null;
+  // For small sets, bitmask is ultra fast
+  const limit = 1 << n;
+  for (let i = 0; i < limit; i++) {
+    let left = [],
+      right = [];
+    let kL = 0,
+      kR = 0;
+
+    for (let j = 0; j < n; j++) {
+      if ((i >> j) & 1) {
+        left.push(items[j]);
+        kL += items[j].karma;
+      } else {
+        right.push(items[j]);
+        kR += items[j].karma;
+      }
+    }
+
+    // Validates if the division respects the current build slots
+    if (left.length <= MAX_ITEMS_LEFT && right.length <= MAX_ITEMS_RIGHT && left.length + right.length === n) {
+      const balance = kL === 0 && kR === 0 ? 1 : Math.min(kL, kR) / Math.max(kL, kR);
+      if (balance >= BALANCE_THRESHOLD) {
+        if (!best || balance > best.balance) {
+          best = { left, right, karmaL: kL, karmaR: kR, balance };
+        }
+      }
+    }
+  }
+  return best;
 }
 
 /**
