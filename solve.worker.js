@@ -8,6 +8,32 @@ let BALANCE_THRESHOLD = 1.0;
 let MAX_FILLERS = 10;
 let MAX_BUILDS_RETURNED = 50;
 
+function getTierScore(tier) {
+  switch (tier) {
+    case "epic":
+      return 4;
+    case "good":
+      return 2;
+    default:
+      return 1;
+  }
+}
+
+function calculateRealScore(items) {
+  const statSet = new Set();
+  items.forEach((item) => {
+    item.stats.forEach((stat) => {
+      statSet.add(stat.name + "|" + stat.tier);
+    });
+  });
+  let realScore = 0;
+  statSet.forEach((statKey) => {
+    const tier = statKey.split("|")[1];
+    realScore += getTierScore(tier);
+  });
+  return realScore;
+}
+
 function solveWithInitial(
   id,
   pool,
@@ -74,7 +100,8 @@ function solveWithInitial(
 
       const balanceResult = findBestBalance(items);
       if (balanceResult) {
-        results.push({ ...balanceResult, score: currentScore, mask: currentMask });
+        const realScore = calculateRealScore(items);
+        results.push({ ...balanceResult, score: realScore, mask: currentMask });
         if (results.length > 1000) return;
       }
     }
