@@ -163,6 +163,7 @@ function runOptimizer() {
   let cancelTimeout = null;
 
   setTimeout(() => {
+    const solveStartTime = performance.now();
     solvePromise = solveAsync(allItems, desired, currentSortOrder);
 
     // Show cancel button after 10 seconds
@@ -172,6 +173,8 @@ function runOptimizer() {
 
     solvePromise
       .then((results) => {
+        console.log(`Solver completed in ${(performance.now() - solveStartTime) / 1000}s`);
+
         clearTimeout(cancelTimeout);
         cancelContainer.style.display = "none";
         setStatus("");
@@ -182,6 +185,8 @@ function runOptimizer() {
         showResults(results, desired);
       })
       .catch((error) => {
+        console.log(`Solver completed in ${(performance.now() - solveStartTime) / 1000}s`);
+
         clearTimeout(cancelTimeout);
         cancelContainer.style.display = "none";
         setStatus("");
